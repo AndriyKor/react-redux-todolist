@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   items: [],
   isFetching: false
-  //error: undefined
 };
 
 const todos = (state = INITIAL_STATE, action) => {
