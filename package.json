@@ -1,17 +1,53 @@
 {
-  "name": "redux_todolist",
+  "name": "react-redux-todolist",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "My first react-redux app",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open",
+    "build:dev": "webpack --env=dev --progress --profile --colors",
+    "build:dist": "webpack --env=prod --progress --profile --colors"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.15",
+    "path": "^0.12.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-flexbox-grid": "^2.1.2",
+    "react-hot-loader": "^4.5.3",
     "react-redux": "^7.1.3",
-    "redux": "^4.0.4"
-  }
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.0",
+    "file-loader": "^5.0.2",
+    "gulp-babel": "^8.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "redux-devtools": "^3.5.0",
+    "style-loader": "^1.0.2",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndriyKor/redux-todolist-example.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/AndriyKor/redux-todolist-example/issues"
+  },
+  "homepage": "https://github.com/AndriyKor/redux-todolist-example#readme"
 }
