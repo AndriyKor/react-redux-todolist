@@ -9,7 +9,7 @@ class TodoList extends Component {
 
   render() {
     return this.props.isFetching ? (
-      <span>Loading...</span>
+      <div className="loader">Loading...</div>
     ) : (
       <ul>
         {this.props.todos.map(todo => (

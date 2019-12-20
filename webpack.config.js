@@ -1,17 +1,11 @@
 var path = require("path");
 const webpack = require("webpack");
 const publicPath = "/dist/build/";
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./index.js",
   devtool: "cheap-module-source-map",
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "React-Redux Todo List"
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 
   output: {
     path: path.join(__dirname, publicPath),
@@ -26,10 +20,11 @@ module.exports = {
     historyApiFallback: true,
     noInfo: false,
     stats: "minimal",
-    publicPath: publicPath,
-    contentBase: path.join(__dirname, publicPath),
+    publicPath: "/",
+    contentBase: path.join(__dirname, "/"),
     hot: true
   },
+
   module: {
     rules: [
       {
