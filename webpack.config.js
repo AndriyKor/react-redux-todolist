@@ -29,8 +29,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-        include: /flexboxgrid/
+        use: ["style-loader", "css-loader"]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
