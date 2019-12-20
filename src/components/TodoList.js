@@ -12,7 +12,7 @@ class TodoList extends Component {
     return this.props.isFetching ? (
       <div className="loader">Loading...</div>
     ) : (
-      <ul>
+      <ul className="list">
         {this.props.todos.map(todo => (
           <Todo
             key={todo.id}
