@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Todo from "./Todo";
-import "./../styles/loader.css";
+import Todo from "./Todo.jsx";
+import "./../styles/loader";
 
 class TodoList extends Component {
   componentDidMount() {
@@ -11,6 +11,8 @@ class TodoList extends Component {
   render() {
     return this.props.isFetching ? (
       <div className="loader">Loading...</div>
+    ) : this.props.todos.length === 0 ? (
+      <span className="noItems">No items added yet</span>
     ) : (
       <ul className="list">
         {this.props.todos.map(todo => (

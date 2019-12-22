@@ -1,11 +1,19 @@
 var path = require("path");
 const webpack = require("webpack");
 const publicPath = "/dist/build/";
+const isDevelopment = process.env.NODE_ENV === "development";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./index.js",
   devtool: "cheap-module-source-map",
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? "[name].css" : "[name].[hash].css",
+      chunkFilename: isDevelopment ? "[id].css" : "[id].[hash].css"
+    })
+  ],
 
   output: {
     path: path.join(__dirname, publicPath),
@@ -28,8 +36,37 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              sourceMap: isDevelopment
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -41,5 +78,9 @@ module.exports = {
         loaders: ["babel-loader"]
       }
     ]
+  },
+
+  resolve: {
+    extensions: [".js", ".jsx", ".scss"]
   }
 };
