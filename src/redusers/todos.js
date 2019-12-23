@@ -1,24 +1,34 @@
+import { ActionTypes } from "./../actions";
+
 const INITIAL_STATE = {
   items: [],
-  isFetching: false
+  isFetching: false,
+  errorMessage: ""
 };
 
 const todos = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "FETCH_TODOS_REQUEST":
+    case ActionTypes.FETCH_TODOS_REQUEST:
       return {
         ...state,
         isFetching: true
       };
 
-    case "FETCH_TODOS_SUCCESS":
+    case ActionTypes.FETCH_TODOS_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        items: action.todos
+        items: action.todos,
+        errorMessage: ""
       };
 
-    case "ADD_TODO":
+    case ActionTypes.FETCH_TODOS_ERROR:
+      return {
+        ...INITIAL_STATE,
+        errorMessage: action.errorMessage
+      };
+
+    case ActionTypes.ADD_TODO:
       return {
         ...state,
         items: [
@@ -31,7 +41,7 @@ const todos = (state = INITIAL_STATE, action) => {
         ]
       };
 
-    case "TOGGLE_TODO":
+    case ActionTypes.TOGGLE_TODO:
       return {
         ...state,
         items: state.items.map(todo =>
