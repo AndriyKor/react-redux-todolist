@@ -6,18 +6,21 @@ const INITIAL_STATE = {
 const todos = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "FETCH_TODOS_REQUEST":
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      });
+      };
 
     case "FETCH_TODOS_SUCCESS":
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         items: action.todos
-      });
+      };
 
     case "ADD_TODO":
       return {
+        ...state,
         items: [
           ...state.items,
           {
@@ -30,6 +33,7 @@ const todos = (state = INITIAL_STATE, action) => {
 
     case "TOGGLE_TODO":
       return {
+        ...state,
         items: state.items.map(todo =>
           todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
         )
