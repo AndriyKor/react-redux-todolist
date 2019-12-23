@@ -1,7 +1,7 @@
 var path = require("path");
 const webpack = require("webpack");
 const publicPath = "/dist/build/";
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment = true; //process.env.NODE_ENV === "development";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {

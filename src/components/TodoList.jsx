@@ -12,7 +12,7 @@ class TodoList extends Component {
     return this.props.isFetching ? (
       <div className="loader">Loading...</div>
     ) : this.props.todos.length === 0 ? (
-      <span className="noItems">No items added yet</span>
+      <span className="noItems">The list is empty</span>
     ) : (
       <ul className="list">
         {this.props.todos.map(todo => (
