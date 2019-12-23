@@ -17,14 +17,15 @@ const todos = (state = INITIAL_STATE, action) => {
     case ActionTypes.FETCH_TODOS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
         items: action.todos,
+        isFetching: false,
         errorMessage: ""
       };
 
     case ActionTypes.FETCH_TODOS_ERROR:
       return {
-        ...INITIAL_STATE,
+        items: action.todos,
+        isFetching: false,
         errorMessage: action.errorMessage
       };
 
