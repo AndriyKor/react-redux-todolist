@@ -1,5 +1,44 @@
 import axios from "axios";
 
+/*
+// Action pattern
+const patern = {
+  type: "ACTION_NAME",
+  payload: {
+    // ADD TODO
+    id: 1,
+    text: "Item text",
+
+    // TOOGLE TODO
+    id: 1,
+
+    // SET VISIBILITY FILTER
+    filter: "Filter name",
+
+    // FETCH TODO REQUEST
+    // nothing is needed
+
+    // FETCH TODO SUCCESS
+    todos: [
+      {
+        id: 1,
+        text: "Item text",
+        completed: false
+      }
+    ]
+
+    // FETCH TODO ERROR
+    = new Error("Error message"),
+  },
+
+  // Equals to 'true' if action is FETCH TODO ERROR
+  error: false,
+
+  // Any extra information that is not part of the payload
+  meta: {}
+};
+*/
+
 let nextTodoId = 0;
 
 export const addTodo = text => {
