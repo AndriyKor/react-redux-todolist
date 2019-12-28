@@ -1,3 +1,18 @@
+import { ActionTypes } from "./../actions";
+
+// STATE PATTERN
+// const pattern = {
+//   items: [
+//     {
+//       id: 1,
+//       text: "Item name",
+//       completed: false
+//     }
+//   ],
+//   isFetching: false,
+//   errorMessage: ""
+// };
+
 const INITIAL_STATE = {
   items: [],
   isFetching: false
@@ -5,33 +20,47 @@ const INITIAL_STATE = {
 
 const todos = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "FETCH_TODOS_REQUEST":
-      return Object.assign({}, state, {
-        isFetching: true
-      });
-
-    case "FETCH_TODOS_SUCCESS":
-      return Object.assign({}, state, {
-        isFetching: false,
-        items: action.todos
-      });
-
-    case "ADD_TODO":
+    case ActionTypes.FETCH_TODOS_REQUEST:
       return {
+        ...state,
+        isFetching: true
+      };
+
+    case ActionTypes.FETCH_TODOS_SUCCESS:
+      return {
+        ...state,
+        items: action.payload.todos,
+        isFetching: false
+      };
+
+    case ActionTypes.FETCH_TODOS_ERROR:
+      return {
+        items: [],
+        isFetching: false,
+        errorMessage: action.payload.message
+      };
+
+    case ActionTypes.ADD_TODO:
+      const { id, text } = action.payload;
+      return {
+        ...state,
         items: [
           ...state.items,
           {
-            id: action.id,
-            text: action.text,
+            id,
+            text,
             completed: false
           }
         ]
       };
 
-    case "TOGGLE_TODO":
+    case ActionTypes.TOGGLE_TODO:
       return {
+        ...state,
         items: state.items.map(todo =>
-          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+          todo.id === action.payload.id
+            ? { ...todo, completed: !todo.completed }
+            : todo
         )
       };
 
