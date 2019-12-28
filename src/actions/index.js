@@ -32,7 +32,7 @@ const patern = {
   },
 
   // Equals to 'true' if action is FETCH TODO ERROR
-  error: false,
+  error: true,
 
   // Any extra information that is not part of the payload
   meta: {}
@@ -44,22 +44,28 @@ let nextTodoId = 0;
 export const addTodo = text => {
   return {
     type: ActionTypes.ADD_TODO,
-    id: nextTodoId++,
-    text
+    payload: {
+      id: nextTodoId++,
+      text
+    }
   };
 };
 
 export const toggleTodo = id => {
   return {
     type: ActionTypes.TOGGLE_TODO,
-    id
+    payload: {
+      id
+    }
   };
 };
 
 export const setVisibilityFilter = filter => {
   return {
     type: ActionTypes.SET_VISIBILITY_FILTER,
-    filter
+    payload: {
+      filter
+    }
   };
 };
 
@@ -75,13 +81,15 @@ export const fetchTodos = () => {
       .then(response => {
         dispatch({
           type: ActionTypes.FETCH_TODOS_SUCCESS,
-          todos: response.data.map(item => {
-            return {
-              id: item.id,
-              text: item.text,
-              completed: false
-            };
-          })
+          payload: {
+            todos: response.data.map(item => {
+              return {
+                id: item.id,
+                text: item.text,
+                completed: false
+              };
+            })
+          }
         });
 
         nextTodoId = response.data.length + 1;
@@ -89,8 +97,8 @@ export const fetchTodos = () => {
       .catch(error => {
         dispatch({
           type: ActionTypes.FETCH_TODOS_ERROR,
-          todos: [],
-          errorMessage: error.message
+          payload: new Error(error.message),
+          error: true
         });
       });
   };

@@ -1,9 +1,21 @@
 import { ActionTypes } from "./../actions";
 
+// STATE PATTERN
+// const pattern = {
+//   items: [
+//     {
+//       id: 1,
+//       text: "Item name",
+//       completed: false
+//     }
+//   ],
+//   isFetching: false,
+//   errorMessage: ""
+// };
+
 const INITIAL_STATE = {
   items: [],
-  isFetching: false,
-  errorMessage: ""
+  isFetching: false
 };
 
 const todos = (state = INITIAL_STATE, action) => {
@@ -17,26 +29,26 @@ const todos = (state = INITIAL_STATE, action) => {
     case ActionTypes.FETCH_TODOS_SUCCESS:
       return {
         ...state,
-        items: action.todos,
-        isFetching: false,
-        errorMessage: ""
+        items: action.payload.todos,
+        isFetching: false
       };
 
     case ActionTypes.FETCH_TODOS_ERROR:
       return {
-        items: action.todos,
+        items: [],
         isFetching: false,
-        errorMessage: action.errorMessage
+        errorMessage: action.payload.message
       };
 
     case ActionTypes.ADD_TODO:
+      const { id, text } = action.payload;
       return {
         ...state,
         items: [
           ...state.items,
           {
-            id: action.id,
-            text: action.text,
+            id,
+            text,
             completed: false
           }
         ]
@@ -46,7 +58,9 @@ const todos = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         items: state.items.map(todo =>
-          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+          todo.id === action.payload.id
+            ? { ...todo, completed: !todo.completed }
+            : todo
         )
       };
 
