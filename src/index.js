@@ -2,10 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./src/redusers";
-import App from "./src/components/App.jsx";
+import rootReducer from "./redusers";
+import App from "./components/App.jsx";
 import thunk from "redux-thunk";
-import "./src/styles/common";
+import "./styles/common.scss";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

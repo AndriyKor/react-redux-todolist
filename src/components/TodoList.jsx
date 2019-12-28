@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Todo from "./Todo.jsx";
-import "./../styles/loader";
+import "./../styles/loader.scss";
 
 class TodoList extends Component {
   componentDidMount() {
